@@ -6,7 +6,7 @@ Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} AI
    ClientTop       =   432
    ClientWidth     =   10800
    OleObjectBlob   =   "AI.frx":0000
-   StartUpPosition =   1  'ËùÓĞÕßÖĞĞÄ
+   StartUpPosition =   1  'æ‰€æœ‰è€…ä¸­å¿ƒ
 End
 Attribute VB_Name = "AI"
 Attribute VB_GlobalNameSpace = False
@@ -14,8 +14,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub UserForm_Initialize()
-    ' ³õÊ¼»¯¶Ô»°¿ò±êÌâ
-    Me.Caption = "Word AIÖúÊÖ"
+    ' åˆå§‹åŒ–å¯¹è¯æ¡†æ ‡é¢˜
+    Me.Caption = "Word AIåŠ©æ‰‹"
 End Sub
 Private Sub Button1_Click()
     Dim selectedText As String
@@ -29,68 +29,68 @@ Private Sub Button1_Click()
     Dim new_content As String
     Dim dialogHistory As String
 
-    ' »ñÈ¡ Word ÎÄµµÖĞÑ¡ÖĞµÄÄÚÈİ
+    ' è·å– Word æ–‡æ¡£ä¸­é€‰ä¸­çš„å†…å®¹
     If Selection.Type = wdSelectionIP Then
-        MsgBox "ÇëÏÈÑ¡ÖĞÒª×ÉÑ¯µÄÎÄ±¾¡£", vbExclamation
+        MsgBox "è¯·å…ˆé€‰ä¸­è¦å’¨è¯¢çš„æ–‡æœ¬ã€‚", vbExclamation
         Exit Sub
     End If
     selectedText = Selection.text
 
-    ' »ñÈ¡ÓÃ»§ÊäÈëµÄÏµÍ³ÌáÊ¾
+    ' è·å–ç”¨æˆ·è¾“å…¥çš„ç³»ç»Ÿæç¤º
     systemContent = TextBox1.text
-    systemContent = Replace(systemContent, "\", "\\")       ' ×ªÒå·´Ğ±¸Ü
-    systemContent = Replace(systemContent, """", """""")    ' ×ªÒåË«ÒıºÅ
-    systemContent = Replace(systemContent, vbLf, "\n")      ' ×ªÒå»»ĞĞ·û£¨LF£©
-    systemContent = Replace(systemContent, vbCr, "\r")      ' ×ªÒå»Ø³µ·û£¨CR£©
+    systemContent = Replace(systemContent, "\", "\\")       ' è½¬ä¹‰åæ–œæ 
+    systemContent = Replace(systemContent, """", """""")    ' è½¬ä¹‰åŒå¼•å·
+    systemContent = Replace(systemContent, vbLf, "\n")      ' è½¬ä¹‰æ¢è¡Œç¬¦ï¼ˆLFï¼‰
+    systemContent = Replace(systemContent, vbCr, "\r")      ' è½¬ä¹‰å›è½¦ç¬¦ï¼ˆCRï¼‰
 
     If selectedText = "" Then
-        MsgBox "Î´¼ì²âµ½Ñ¡ÖĞµÄÎÄ±¾£¬ÇëÏÈÑ¡ÖĞÒª×ÉÑ¯µÄÄÚÈİ¡£", vbExclamation
+        MsgBox "æœªæ£€æµ‹åˆ°é€‰ä¸­çš„æ–‡æœ¬ï¼Œè¯·å…ˆé€‰ä¸­è¦å’¨è¯¢çš„å†…å®¹ã€‚", vbExclamation
         Exit Sub
     End If
 
-    ' ´¦ÀíÑ¡ÖĞÎÄ±¾ÖĞµÄÌØÊâ×Ö·û£¬±ÜÃâÆÆ»µ JSON ¸ñÊ½
-    selectedText = Replace(selectedText, "\", "\\")        ' ×ªÒå·´Ğ±¸Ü
-    selectedText = Replace(selectedText, """", """""")     ' ×ªÒåË«ÒıºÅ
-    selectedText = Replace(selectedText, vbLf, "\n")       ' ×ªÒå»»ĞĞ·û£¨LF£©
-    selectedText = Replace(selectedText, vbCr, "\r")       ' ×ªÒå»Ø³µ·û£¨CR£©
+    ' å¤„ç†é€‰ä¸­æ–‡æœ¬ä¸­çš„ç‰¹æ®Šå­—ç¬¦ï¼Œé¿å…ç ´å JSON æ ¼å¼
+    selectedText = Replace(selectedText, "\", "\\")        ' è½¬ä¹‰åæ–œæ 
+    selectedText = Replace(selectedText, """", """""")     ' è½¬ä¹‰åŒå¼•å·
+    selectedText = Replace(selectedText, vbLf, "\n")       ' è½¬ä¹‰æ¢è¡Œç¬¦ï¼ˆLFï¼‰
+    selectedText = Replace(selectedText, vbCr, "\r")       ' è½¬ä¹‰å›è½¦ç¬¦ï¼ˆCRï¼‰
 
-    ' ´´½¨HTTP¶ÔÏó
+    ' åˆ›å»ºHTTPå¯¹è±¡
     On Error Resume Next
     Set http = CreateObject("MSXML2.XMLHTTP")
     If http Is Nothing Then
-        MsgBox "ÎŞ·¨´´½¨ HTTP ¶ÔÏó£¬Çë¼ì²éÄúµÄ»·¾³ÉèÖÃ£¡", vbCritical
+        MsgBox "æ— æ³•åˆ›å»º HTTP å¯¹è±¡ï¼Œè¯·æ£€æŸ¥æ‚¨çš„ç¯å¢ƒè®¾ç½®ï¼", vbCritical
         Exit Sub
     End If
     On Error GoTo 0
 
-    ' ¹¹ÔìJSONÇëÇóÌå£¬°üº¬ÀúÊ·ÏûÏ¢ºÍµ±Ç°ÏûÏ¢
+    ' æ„é€ JSONè¯·æ±‚ä½“ï¼ŒåŒ…å«å†å²æ¶ˆæ¯å’Œå½“å‰æ¶ˆæ¯
     dialogHistory = TextBox3.text
-    dialogHistory = Replace(dialogHistory, "\", "\\")       ' ×ªÒå·´Ğ±¸Ü
-    dialogHistory = Replace(dialogHistory, """", """""")    ' ×ªÒåË«ÒıºÅ
-    dialogHistory = Replace(dialogHistory, vbLf, "\n")      ' ×ªÒå»»ĞĞ·û£¨LF£©
-    dialogHistory = Replace(dialogHistory, vbCr, "\r")      ' ×ªÒå»Ø³µ·û£¨CR£©
-    new_content = dialogHistory + "ÒÔÉÏÊÇÀúÊ·ÏûÏ¢£¬ÒÔÏÂÊÇ×îĞÂÃüÁî£º" + systemContent
+    dialogHistory = Replace(dialogHistory, "\", "\\")       ' è½¬ä¹‰åæ–œæ 
+    dialogHistory = Replace(dialogHistory, """", """""")    ' è½¬ä¹‰åŒå¼•å·
+    dialogHistory = Replace(dialogHistory, vbLf, "\n")      ' è½¬ä¹‰æ¢è¡Œç¬¦ï¼ˆLFï¼‰
+    dialogHistory = Replace(dialogHistory, vbCr, "\r")      ' è½¬ä¹‰å›è½¦ç¬¦ï¼ˆCRï¼‰
+    new_content = dialogHistory + "ä»¥ä¸Šæ˜¯å†å²æ¶ˆæ¯ï¼Œä»¥ä¸‹æ˜¯æœ€æ–°å‘½ä»¤ï¼š" + systemContent
     jsonBody = "{""model"": ""qwen-plus"",""messages"": [{""role"": ""system"",""content"": """ & new_content & """},{""role"": ""user"",""content"": """ & selectedText & """}]}"
 
-    ' ·¢ËÍPOSTÇëÇó
-    ' ÉèÖÃAPIÃÜÔ¿ºÍURL
+    ' å‘é€POSTè¯·æ±‚
+    ' è®¾ç½®APIå¯†é’¥å’ŒURL
     Dim apiKey As String
     Dim apiUrl As String
-    apiKey = "sk-ad3f81c2a0934b3289501e9d4e3d6452" ' Ìæ»»ÎªÄúµÄAPIÃÜÔ¿
-    apiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+    apiKey = "xx-xxxxxxxxxxxxxxxxxxxxx" ' æ›¿æ¢ä¸ºæ‚¨çš„APIå¯†é’¥
+    apiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions" ' æ›¿æ¢ä¸ºæ‚¨çš„APIè¯·æ±‚åœ°å€
     With http
         .Open "POST", apiUrl, False
         .setRequestHeader "Authorization", "Bearer " & apiKey
         .setRequestHeader "Content-Type", "application/json"
         .send jsonBody
         If .readyState <> 4 Or .Status <> 200 Then
-            MsgBox "ÇëÇóÊ§°Ü: " & .Status & " - " & .responseText, vbCritical
+            MsgBox "è¯·æ±‚å¤±è´¥: " & .Status & " - " & .responseText, vbCritical
             Exit Sub
         End If
         response = .responseText
     End With
 
-    ' Ê¹ÓÃÕıÔò±í´ïÊ½ÌáÈ¡·­Òë½á¹û
+    ' ä½¿ç”¨æ­£åˆ™è¡¨è¾¾å¼æå–ç¿»è¯‘ç»“æœ
     Set regex = CreateObject("VBScript.RegExp")
     regex.pattern = """content"":""(.*?)""}"
     regex.IgnoreCase = True
@@ -98,22 +98,22 @@ Private Sub Button1_Click()
 
     Set matches = regex.Execute(response)
     If matches.Count > 0 Then
-        translation = matches(0).SubMatches(0)  ' ÌáÈ¡µÚÒ»¸öÆ¥ÅäµÄÄÚÈİ
+        translation = matches(0).SubMatches(0)  ' æå–ç¬¬ä¸€ä¸ªåŒ¹é…çš„å†…å®¹
 
-        ' ´¦Àí JSON Êı¾İÖĞµÄ×ªÒå×Ö·û
-        translation = Replace(translation, "\""", """")   ' Ìæ»»×ªÒåµÄË«ÒıºÅ
-        translation = Replace(translation, "", """")      ' Ìæ»»µ¥ÒıºÅ£¨Èç¹ûĞèÒª£©
-        translation = Replace(translation, "\n", vbCrLf)  ' ½« \n Ìæ»»Îª»»ĞĞ·û
-        translation = Replace(translation, "\r", vbCrLf)  ' ½« \r Ìæ»»Îª»»ĞĞ·û
-        translation = Replace(translation, "\\", "\")      ' È¡Ïû·´Ğ±¸ÜµÄ×ªÒå
+        ' å¤„ç† JSON æ•°æ®ä¸­çš„è½¬ä¹‰å­—ç¬¦
+        translation = Replace(translation, "\""", """")   ' æ›¿æ¢è½¬ä¹‰çš„åŒå¼•å·
+        translation = Replace(translation, "", """")      ' æ›¿æ¢å•å¼•å·ï¼ˆå¦‚æœéœ€è¦ï¼‰
+        translation = Replace(translation, "\n", vbCrLf)  ' å°† \n æ›¿æ¢ä¸ºæ¢è¡Œç¬¦
+        translation = Replace(translation, "\r", vbCrLf)  ' å°† \r æ›¿æ¢ä¸ºæ¢è¡Œç¬¦
+        translation = Replace(translation, "\\", "\")      ' å–æ¶ˆåæ–œæ çš„è½¬ä¹‰
 
-        ' ×·¼ÓÏûÏ¢µ½TextBox3£¬²¢×Ô¶¯»»ĞĞ
+        ' è¿½åŠ æ¶ˆæ¯åˆ°TextBox3ï¼Œå¹¶è‡ªåŠ¨æ¢è¡Œ
         If Len(TextBox3.text) > 0 Then
             TextBox3.text = TextBox3.text & vbCrLf
         End If
-        TextBox3.text = TextBox3.text & "ÓÃ»§: " & systemContent & vbCrLf & "»Ø¸´: " & translation & vbCrLf & vbCrLf
+        TextBox3.text = TextBox3.text & "ç”¨æˆ·: " & systemContent & vbCrLf & "å›å¤: " & translation & vbCrLf & vbCrLf
     Else
-        MsgBox "Î´ÄÜÌáÈ¡»Ø¸´½á¹û£¬Çë¼ì²é·µ»ØµÄÊı¾İ¸ñÊ½¡£", vbCritical
+        MsgBox "æœªèƒ½æå–å›å¤ç»“æœï¼Œè¯·æ£€æŸ¥è¿”å›çš„æ•°æ®æ ¼å¼ã€‚", vbCritical
     End If
 End Sub
 Private Sub Button2_Click()
@@ -125,40 +125,40 @@ Private Sub Button2_Click()
     Dim matches As Object
     Dim mtch As Object
     Dim lineRange As range
-    Dim insertPoint As Long ' ÓÃÓÚ±£´æ²åÈëµãµÄÎ»ÖÃ
+    Dim insertPoint As Long ' ç”¨äºä¿å­˜æ’å…¥ç‚¹çš„ä½ç½®
 
-    ' »ñÈ¡ÓÃ»§ÔÚ TextBox3 ÖĞÑ¡ÖĞµÄÎÄ±¾
+    ' è·å–ç”¨æˆ·åœ¨ TextBox3 ä¸­é€‰ä¸­çš„æ–‡æœ¬
     insertText = TextBox3.SelText
     If insertText = "" Then
-        MsgBox "ÇëÔÚ TextBox3 ÖĞÑ¡ÖĞÒª²åÈëµÄÎÄ±¾¡£", vbExclamation
+        MsgBox "è¯·åœ¨ TextBox3 ä¸­é€‰ä¸­è¦æ’å…¥çš„æ–‡æœ¬ã€‚", vbExclamation
         Exit Sub
     End If
 
-    ' ¼ì²éÊÇ·ñÓĞÑ¡ÖĞµÄÄÚÈİ
+    ' æ£€æŸ¥æ˜¯å¦æœ‰é€‰ä¸­çš„å†…å®¹
     If Selection.Type = wdSelectionIP Then
-        MsgBox "ÇëÏÈÔÚ Word ÎÄµµÖĞÑ¡ÖĞ²åÈëÎ»ÖÃ¡£", vbExclamation
+        MsgBox "è¯·å…ˆåœ¨ Word æ–‡æ¡£ä¸­é€‰ä¸­æ’å…¥ä½ç½®ã€‚", vbExclamation
         Exit Sub
     End If
 
-    ' °´ĞĞ·Ö¸îÎÄ±¾
+    ' æŒ‰è¡Œåˆ†å‰²æ–‡æœ¬
     lines = Split(insertText, vbCrLf)
 
-    ' ³õÊ¼»¯ÕıÔò±í´ïÊ½¶ÔÏó
+    ' åˆå§‹åŒ–æ­£åˆ™è¡¨è¾¾å¼å¯¹è±¡
     Set markdownRegex = CreateObject("VBScript.RegExp")
     With markdownRegex
         .Global = True
         .IgnoreCase = True
     End With
 
-    ' »ñÈ¡µ±Ç°Ñ¡ÖĞ·¶Î§µÄ½áÊøÎ»ÖÃ
+    ' è·å–å½“å‰é€‰ä¸­èŒƒå›´çš„ç»“æŸä½ç½®
     insertPoint = Selection.range.End
 
-    ' ²åÈëÎÄ±¾²¢´¦Àí Markdown ¸ñÊ½
+    ' æ’å…¥æ–‡æœ¬å¹¶å¤„ç† Markdown æ ¼å¼
     For i = LBound(lines) To UBound(lines)
         Dim formattedLine As String
         formattedLine = lines(i)
 
-        ' ´¦Àí¼Ó´ÖºÍĞ±Ìå£¨***...***£©
+        ' å¤„ç†åŠ ç²—å’Œæ–œä½“ï¼ˆ***...***ï¼‰
         regexPattern = "\*\*\*(.*?)\*\*\*"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(formattedLine)
@@ -166,7 +166,7 @@ Private Sub Button2_Click()
             formattedLine = Replace(formattedLine, mtch.value, mtch.SubMatches(0))
         Next mtch
 
-        ' ´¦Àí¼Ó´Ö£¨**...**£©
+        ' å¤„ç†åŠ ç²—ï¼ˆ**...**ï¼‰
         regexPattern = "\*\*(.*?)\*\*"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(formattedLine)
@@ -174,7 +174,7 @@ Private Sub Button2_Click()
             formattedLine = Replace(formattedLine, mtch.value, mtch.SubMatches(0))
         Next mtch
 
-        ' ´¦ÀíĞ±Ìå£¨*...*£©
+        ' å¤„ç†æ–œä½“ï¼ˆ*...*ï¼‰
         regexPattern = "\*(.*?)\*"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(formattedLine)
@@ -182,7 +182,7 @@ Private Sub Button2_Click()
             formattedLine = Replace(formattedLine, mtch.value, mtch.SubMatches(0))
         Next mtch
 
-        ' ´¦Àí±êÌâ
+        ' å¤„ç†æ ‡é¢˜
         regexPattern = "(#{1,4})\s(.*?(?=##|\n|$))"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(formattedLine)
@@ -190,11 +190,11 @@ Private Sub Button2_Click()
             formattedLine = Replace(formattedLine, mtch.value, mtch.SubMatches(1))
         Next mtch
 
-        ' ²åÈë´¦ÀíºóµÄÎÄ±¾
+        ' æ’å…¥å¤„ç†åçš„æ–‡æœ¬
         Set lineRange = ActiveDocument.range(insertPoint, insertPoint)
         lineRange.text = formattedLine & vbCrLf
 
-        ' ¸ñÊ½»¯¼Ó´ÖºÍĞ±Ìå£¨***...***£©
+        ' æ ¼å¼åŒ–åŠ ç²—å’Œæ–œä½“ï¼ˆ***...***ï¼‰
         regexPattern = "\*\*\*(.*?)\*\*\*"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(lines(i))
@@ -209,7 +209,7 @@ Private Sub Button2_Click()
             End With
         Next mtch
 
-        ' ¸ñÊ½»¯¼Ó´Ö£¨**...**£©
+        ' æ ¼å¼åŒ–åŠ ç²—ï¼ˆ**...**ï¼‰
         regexPattern = "\*\*(.*?)\*\*"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(lines(i))
@@ -221,7 +221,7 @@ Private Sub Button2_Click()
             boldRange.Font.Bold = True
         Next mtch
 
-        ' ¸ñÊ½»¯Ğ±Ìå£¨*...*£©
+        ' æ ¼å¼åŒ–æ–œä½“ï¼ˆ*...*ï¼‰
         regexPattern = "\*(.*?)\*"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(lines(i))
@@ -233,7 +233,7 @@ Private Sub Button2_Click()
             italicRange.Font.Italic = True
         Next mtch
 
-        ' ¸ñÊ½»¯±êÌâ
+        ' æ ¼å¼åŒ–æ ‡é¢˜
         regexPattern = "(#{1,4})\s(.*?(?=##|\n|$))"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(lines(i))
@@ -245,7 +245,7 @@ Private Sub Button2_Click()
             headerRange.Font.Bold = True
         Next mtch
 
-        ' ¸üĞÂ²åÈëµãÎ»ÖÃ
+        ' æ›´æ–°æ’å…¥ç‚¹ä½ç½®
         insertPoint = insertPoint + Len(formattedLine) + 1
     Next i
 End Sub
