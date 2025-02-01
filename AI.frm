@@ -76,8 +76,8 @@ Private Sub Button1_Click()
     ' 设置API密钥和URL
     Dim apiKey As String
     Dim apiUrl As String
-    apiKey = "xx-xxxxxxxxxxxxxxxxxxxxx" ' 替换为您的API密钥
-    apiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions" ' 替换为您的API请求地址
+    apiKey = "sk-ad3f81c2a0934b3289501e9d4e3d6452" ' 替换为您的API密钥
+    apiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
     With http
         .Open "POST", apiUrl, False
         .setRequestHeader "Authorization", "Bearer " & apiKey
@@ -183,7 +183,7 @@ Private Sub Button2_Click()
         Next mtch
 
         ' 处理标题
-        regexPattern = "(#{1,4})\s(.*?(?=##|\n|$))"
+        regexPattern = "(#{1,4})\s(.*?(?=##|\*\*|\n|$))"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(formattedLine)
         For Each mtch In matches
@@ -234,7 +234,7 @@ Private Sub Button2_Click()
         Next mtch
 
         ' 格式化标题
-        regexPattern = "(#{1,4})\s(.*?(?=##|\n|$))"
+        regexPattern = "(#{1,4})\s(.*?(?=##|\*\*|\n|$))"
         markdownRegex.pattern = regexPattern
         Set matches = markdownRegex.Execute(lines(i))
         For Each mtch In matches
