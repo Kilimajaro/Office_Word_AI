@@ -23,14 +23,14 @@
    ThisDocument.VBProject.VBComponents("窗体").Import "C:\path\to\your\AI.frm"
    ThisDocument.VBProject.VBComponents("窗体").Import "C:\path\to\your\AI.frx"
 请将 C:\path\to\your\ 替换为您解压文件的实际路径。
-#### 导入 模块2.bas 文件
+### 导入 模块2.bas 文件
 1. 在 Visual Basic 编辑器中，选择 插入 > 模块 以创建一个新的模块。
 2. 在新模块中，按 Ctrl + G 打开 立即窗口。
 3. 在 立即窗口 中输入以下代码并按 Enter：
    ```vba
     ThisDocument.VBProject.VBComponents("模块").Import "C:\path\to\your\模块2.bas"
 请将 C:\path\to\your\ 替换为您解压文件的实际路径。
-##### 使用说明
-导入完成后，您可以在 Word 的 Visual Basic 编辑器中查看和编辑这些文件。确保在将您自己的API秘钥和地址替换到AI.frm文件中注释标注的地方。
+## 使用说明
+导入完成后，您可以在 Word 的 Visual Basic 编辑器中查看和编辑这些文件。确保在将您自己的** API秘钥和地址 **替换到** AI.frm **文件中注释标注的地方。
 联系我们
 如有任何问题或需要进一步的帮助，请通过 GitHub Issues 与我们联系。
