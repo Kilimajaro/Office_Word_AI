@@ -76,7 +76,7 @@ Private Sub Button1_Click()
     ' 设置API密钥和URL
     Dim apiKey As String
     Dim apiUrl As String
-    apiKey = "sk-ad3f81c2a0934b3289501e9d4e3d6452" ' 替换为您的API密钥
+    apiKey = "xx-xxxxxxxxxxxxxxxxxxxxx" ' 替换为您的API密钥
     apiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
     With http
         .Open "POST", apiUrl, False
