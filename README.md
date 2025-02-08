@@ -4,7 +4,8 @@
 
 本项目包含三个文件：`AI.frm`、`AI.frx` 和 `模块2.bas`。这些文件需要导入到 Microsoft Word 的 Visual Basic 编辑器中以实现AI辅助写作功能。
 按照以下提示导入完成后，您只需要在word工具栏的最右侧，右键点击自定义工作区，并将导入的模块2添加到开始中的组（可能需要新建）中，即可正常使用。
-![image](https://github.com/user-attachments/assets/431245f3-a714-44e1-bc24-a1780c595dd7)
+![image](https://github.com/user-attachments/assets/a562ec94-4b50-4315-80e8-21b41635685e)
+
 
 
 ## 获取代码
