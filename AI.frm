@@ -1,21 +1,7 @@
-VERSION 5.00
-Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} AI 
-   Caption         =   "UserForm1"
-   ClientHeight    =   7056
-   ClientLeft      =   96
-   ClientTop       =   432
-   ClientWidth     =   10800
-   OleObjectBlob   =   "AI.frx":0000
-   StartUpPosition =   1  '所有者中心
-End
-Attribute VB_Name = "AI"
-Attribute VB_GlobalNameSpace = False
-Attribute VB_Creatable = False
-Attribute VB_PredeclaredId = True
-Attribute VB_Exposed = False
 Private Sub UserForm_Initialize()
     ' 初始化对话框标题
     Me.Caption = "Word AI助手"
+    TextBox5.text = "qwen-max-0125"
 End Sub
 Private Sub Button1_Click()
     Dim selectedText As String
@@ -35,6 +21,7 @@ Private Sub Button1_Click()
         Exit Sub
     End If
     selectedText = Selection.text
+    selectedModel = TextBox5.text
 
     ' 获取用户输入的系统提示
     systemContent = TextBox1.text
@@ -70,19 +57,19 @@ Private Sub Button1_Click()
     dialogHistory = Replace(dialogHistory, vbLf, "\n")      ' 转义换行符（LF）
     dialogHistory = Replace(dialogHistory, vbCr, "\r")      ' 转义回车符（CR）
     new_content = dialogHistory + "以上是历史消息，以下是最新命令：" + systemContent
-    jsonBody = "{""model"": ""qwen-plus"",""messages"": [{""role"": ""system"",""content"": """ & new_content & """},{""role"": ""user"",""content"": """ & selectedText & """}]}"
-
+    jsonBody = "{""model"": """ & selectedModel & """,""messages"": [{""role"": ""system"",""content"": """ & new_content & """},{""role"": ""user"",""content"": """ & selectedText & """}]}"
+ 
     ' 发送POST请求
     ' 设置API密钥和URL
     Dim apiKey As String
     Dim apiUrl As String
-    apiKey = "xx-xxxxxxxxxxxxxxxxxxxxx" ' 替换为您的API密钥
-    apiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+    apiKey = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" ' 替换为您的API密钥
+    apiUrl = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions" ' 建议使用阿里云百炼平台的请求
     With http
         .Open "POST", apiUrl, False
         .setRequestHeader "Authorization", "Bearer " & apiKey
         .setRequestHeader "Content-Type", "application/json"
-        .send jsonBody
+        .Send jsonBody
         If .readyState <> 4 Or .Status <> 200 Then
             MsgBox "请求失败: " & .Status & " - " & .responseText, vbCritical
             Exit Sub
@@ -248,4 +235,37 @@ Private Sub Button2_Click()
         ' 更新插入点位置
         insertPoint = insertPoint + Len(formattedLine) + 1
     Next i
+End Sub
+Private Sub Button3_Click()
+    Dim http As Object
+    Dim url As String
+    Dim json As String
+    Dim response As String
+
+    ' 设置 URL
+    url = "http://127.0.0.1:8020/query"
+    
+    ' 设置请求体（JSON 格式）
+    json = "{""query"": ""什么是先诉抗辩权？"", ""mode"": ""hybrid""}"
+    
+    ' 创建 XMLHTTP 对象
+    Set http = CreateObject("MSXML2.XMLHTTP")
+    
+    ' 打开 POST 请求
+    http.Open "POST", url, False
+    
+    ' 设置请求头
+    http.setRequestHeader "Content-Type", "application/json"
+    
+    ' 发送请求
+    http.Send json
+    
+    ' 获取响应结果
+    response = http.responseText
+    
+    ' 将响应结果写入 TextBox4
+    TextBox4.value = response
+    
+    ' 释放对象
+    Set http = Nothing
 End Sub
